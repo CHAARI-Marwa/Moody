@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:moody/explore.dart';
+import 'login.dart';
+import 'dashboard.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, home: const OnboardingScreen());
+      title: 'Moody',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Color(0xFF005F73),
+        fontFamily: 'Poppins',
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      home: LoginScreen(),
+      routes: {
+        '/dashboard': (context) => DashboardScreen(),
+      },
+    );
   }
 }

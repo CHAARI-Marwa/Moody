@@ -1,227 +1,294 @@
 import 'package:flutter/material.dart';
-import 'package:moody/methods.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:moody/signup.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({Key? key}) : super(key: key);
-
-  @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  PageController _controller = PageController();
-  bool onLastPage = false;
+class ExplorePage extends StatelessWidget {
+  const ExplorePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          PageView(
-            controller: _controller,
-            onPageChanged: (index) {
-              setState(() {
-                onLastPage = (index == 2);
-              });
-            },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IntroPage1(),
-              IntroPage2(),
-              IntroPage3(),
-            ],
-          ),
-          Container(
-            alignment: Alignment(0, 0.75),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    press(context, SignUp());
-                  },
-                  child: Text(
-                    'Skip',
-                    style: TextStyle(
-                      fontFamily: 'titre',
-                      fontSize: 24.0,
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
+              // Profile and Hello section
+              Row(
+                children: [
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: const Icon(Icons.person, color: Colors.grey),
+                  ),
+                  const SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Hello',
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Patient',
+                        style: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              
+              // Rounded buttons
+              _buildRoundedButton(
+                icon: Icons.mic,
+                text: 'How are you feeling today?',
+                color: Colors.blue,
+              ),
+              const SizedBox(height: 12),
+              _buildRoundedButton(
+                icon: Icons.camera_alt,
+                text: 'Care to share a smile today?',
+                color: Colors.cyan,
+              ),
+              const SizedBox(height: 12),
+              _buildRoundedButton(
+                icon: Icons.restaurant_menu,
+                text: 'How was your diet today?',
+                color: Colors.pink,
+              ),
+              
+              const SizedBox(height: 24),
+              // Last Update
+              Text(
+                'Last Update: 31/10/2056 10:12 AM',
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 24),
+              
+              // Mind Health Card
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Mind Health',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        SizedBox(
+                          height: 120,
+                          width: double.infinity,
+                          child: CustomPaint(
+                            painter: GaugePainter(percentage: 0.85),
+                          ),
+                        ),
+                        const Column(
+                          children: [
+                            Text(
+                              '85',
+                              style: TextStyle(
+                                fontSize: 36,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Good',
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+              // Bottom cards
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildBottomCard(
+                      title: 'HAD Survey',
+                      icon: Icons.assignment,
+                      date: '31/10/2056',
                     ),
                   ),
-                ),
-
-                SmoothPageIndicator(
-                  controller: _controller,
-                  count: 3,
-                  effect: WormEffect(
-                    dotColor: Colors.black,
-                    activeDotColor: Colors.black,
-                    dotHeight: 10,
-                    dotWidth: 10,
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildBottomCard(
+                      title: 'Chatbot',
+                      icon: Icons.chat_bubble_outline,
+                    ),
                   ),
-                ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Doctor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.play_circle_outline),
+            label: "Let's Play",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),
+    );
+  }
 
-                //next or done
-                onLastPage
-                    ? GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SignUp();
-                              },
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'Done',
-                          style: TextStyle(
-                            fontFamily: 'titre',
-                            fontSize: 24.0,
-                            color: Colors.black,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                      )
-                    : GestureDetector(
-                        onTap: () {
-                          _controller.nextPage(
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.easeIn,
-                          );
-                        },
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                            fontFamily: 'titre',
-                            fontSize: 24.0,
-                            color: Colors.black,
-                            decoration: TextDecoration.none,
-                          ),
-                        ),
-                      )
-              ],
+  Widget _buildRoundedButton({
+    required IconData icon,
+    required String text,
+    required Color color,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.white),
+          const SizedBox(width: 12),
+          Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
             ),
           ),
         ],
       ),
     );
   }
-}
 
-class IntroPage1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/explore',
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Speech',
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: 'titre',
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+  Widget _buildBottomCard({
+    required String title,
+    required IconData icon,
+    String? date,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 5,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 24),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          if (date != null) ...[
+            const SizedBox(height: 4),
+            Text(
+              'Last Update: $date',
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 12,
               ),
             ),
           ],
-        ),
+        ],
       ),
     );
   }
 }
 
-class IntroPage2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/explore',
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Smile',
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: 'titre',
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+class GaugePainter extends CustomPainter {
+  final double percentage;
 
-class IntroPage3 extends StatelessWidget {
+  GaugePainter({required this.percentage});
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/explore',
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Meals",
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: 'titre',
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width * 0.4;
+    
+    // Background arc
+    final bgPaint = Paint()
+      ..color = Colors.grey[200]!
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 15;
+    
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      3.14,
+      3.14,
+      false,
+      bgPaint,
+    );
+    
+    // Progress arc
+    final progressPaint = Paint()
+      ..color = Colors.green
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 15
+      ..strokeCap = StrokeCap.round;
+    
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      3.14,
+      3.14 * percentage,
+      false,
+      progressPaint,
     );
   }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

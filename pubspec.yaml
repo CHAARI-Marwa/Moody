@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  sdk: '>=3.4.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -61,6 +61,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/white_bg.png
     - assets/background.png
   #   - images/a_dot_ham.jpeg
 
@@ -76,12 +77,15 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: titre
+    - family: Poppins
       fonts:
-        - asset: assets/fonts/titre.ttf
-    - family: ecriture
-      fonts:
-        - asset: assets/fonts/ecriture.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
@@ -91,4 +95,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-
