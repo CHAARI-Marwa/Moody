@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: LoginScreen(),
+      home: DashboardScreen(),
       routes: {
         '/dashboard': (context) => DashboardScreen(),
       },

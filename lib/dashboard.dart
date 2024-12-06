@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'doctor_list.dart';
+import 'had_survey.dart'; // Correct import for HADSurveyPage
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -9,6 +11,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final String patientName = "Patient"; // This should come from user data
   final int mindHealthScore = 85;
   final String lastUpdate = "31/10/2056 10:12 AM";
+  int _selectedIndex = 1; // Set "Let's Play" as active
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 2) { // Doctor tab
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const DoctorListPage()),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +131,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       lastUpdate,
                       style: TextStyle(
                         color: Colors.black87,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
                       ),
                     ),
                   ],
@@ -222,23 +237,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        type: BottomNavigationBarType.fixed,
+        items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Doctor',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.play_circle_outline),
             label: "Let's Play",
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Doctor',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
         ],
-        onTap: (index) {
-          // Handle navigation
-        },
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color(0xFF005F73),
+        onTap: _onItemTapped,
       ),
     );
   }
@@ -286,42 +306,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
     required IconData icon,
     String? date,
   }) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, size: 24),
-          SizedBox(height: 8),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-          if (date != null) ...[
-            SizedBox(height: 4),
-            Text(
-              "Last Update: $date",
-              style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 12,
-              ),
+    return GestureDetector(
+      onTap: () {
+        if (title == "HAD Survey") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HADSurveyPage()),
+          );
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: Offset(0, 4),
             ),
           ],
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, size: 24),
+            SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            if (date != null) ...[
+              SizedBox(height: 4),
+              Text(
+                "Last Update: $date",
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
