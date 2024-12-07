@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dashboard.dart';
 
 class UserInformationScreen extends StatefulWidget {
   @override
@@ -8,13 +9,81 @@ class UserInformationScreen extends StatefulWidget {
 
 class _UserInformationScreenState extends State<UserInformationScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _ageController = TextEditingController();
   String? selectedGender;
+  String? selectedGovernorate;
   bool hasChronicIllness = false;
   bool takingMedications = false;
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-  final TextEditingController _governorateController = TextEditingController();
+  DateTime? selectedDate;
+
+  final List<String> governorates = [
+    'Ariana',
+    'Béja',
+    'Ben Arous',
+    'Bizerte',
+    'Gabès',
+    'Gafsa',
+    'Jendouba',
+    'Kairouan',
+    'Kasserine',
+    'Kébili',
+    'Le Kef',
+    'Mahdia',
+    'La Manouba',
+    'Médenine',
+    'Monastir',
+    'Nabeul',
+    'Sfax',
+    'Sidi Bouzid',
+    'Siliana',
+    'Sousse',
+    'Tataouine',
+    'Tozeur',
+    'Tunis',
+    'Zaghouan',
+  ];
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate ?? DateTime.now().subtract(Duration(days: 365 * 18)),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: Color(0xFF005F73),
+              onPrimary: Colors.white,
+              surface: Colors.white,
+              onSurface: Colors.black,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Color(0xFF005F73),
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        // Calculate age
+        final today = DateTime.now();
+        int age = today.year - picked.year;
+        if (today.month < picked.month || (today.month == picked.month && today.day < picked.day)) {
+          age--;
+        }
+        _ageController.text = age.toString();
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -113,16 +182,30 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                               'Age',
                               controller: _ageController,
                               textInputType: TextInputType.number,
-                              suffixIcon: Icon(Icons.calendar_today, color: Color(0xFF005F73)),
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.calendar_today, color: Color(0xFF005F73)),
+                                onPressed: () => _selectDate(context),
+                              ),
+                              readOnly: true,
                             ),
                             SizedBox(height: 16),
-                            _buildTextField(
+                            _buildDropdownField(
                               'Governorate',
-                              controller: _governorateController,
-                              suffixIcon: Icon(Icons.location_on, color: Color(0xFF005F73)),
+                              governorates,
+                              selectedGovernorate,
+                              (String? newValue) {
+                                setState(() {
+                                  selectedGovernorate = newValue;
+                                });
+                              },
+                              Icon(Icons.location_on, color: Color(0xFF005F73)),
                             ),
                             SizedBox(height: 16),
-                            _buildDropdownField('Gender', ['Male', 'Female', 'Other']),
+                            _buildDropdownField('Gender', ['Male', 'Female', 'Other'], selectedGender, (String? newValue) {
+                              setState(() {
+                                selectedGender = newValue;
+                              });
+                            }),
                             SizedBox(height: 24),
                             _buildCheckboxField(
                               'Do you have any chronic illnesses?',
@@ -141,16 +224,23 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    final userData = {
+                                    // Here you would typically save the user information
+                                    final userInfo = {
                                       'firstName': _firstNameController.text,
                                       'lastName': _lastNameController.text,
                                       'age': _ageController.text,
-                                      'governorate': _governorateController.text,
+                                      'governorate': selectedGovernorate,
                                       'gender': selectedGender,
                                       'hasChronicIllness': hasChronicIllness,
                                       'takingMedications': takingMedications,
                                     };
-                                    Navigator.pushReplacementNamed(context, '/dashboard');
+                                    // Navigate to dashboard
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DashboardScreen(),
+                                      ),
+                                    );
                                   }
                                 },
                                 child: Text(
@@ -186,9 +276,10 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
   }
 
   Widget _buildTextField(String label, {
-    Icon? suffixIcon,
+    Widget? suffixIcon,
     TextEditingController? controller,
     TextInputType? textInputType,
+    bool readOnly = false,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -205,6 +296,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
       child: TextFormField(
         controller: controller,
         keyboardType: textInputType,
+        readOnly: readOnly,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(
@@ -220,6 +312,10 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
           filled: true,
           fillColor: Colors.white,
           contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          floatingLabelStyle: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Poppins',
+          ),
         ),
         validator: (value) {
           if (value == null || value.isEmpty) {
@@ -234,7 +330,13 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
     );
   }
 
-  Widget _buildDropdownField(String label, List<String> items) {
+  Widget _buildDropdownField(
+    String label,
+    List<String> items,
+    String? selectedValue,
+    void Function(String?) onChanged,
+    [Widget? suffixIcon]
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -248,7 +350,7 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
         ],
       ),
       child: DropdownButtonFormField<String>(
-        value: selectedGender,
+        value: selectedValue,
         decoration: InputDecoration(
           labelText: label,
           labelStyle: TextStyle(
@@ -256,6 +358,11 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
             fontFamily: 'Poppins',
             fontSize: 14,
           ),
+          floatingLabelStyle: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Poppins',
+          ),
+          suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide.none,
@@ -267,14 +374,19 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
         items: items.map((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text(value),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: Colors.black,
+              ),
+            ),
           );
         }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            selectedGender = newValue;
-          });
-        },
+        onChanged: onChanged,
+        icon: Icon(Icons.arrow_drop_down, color: Color(0xFF005F73)),
+        isExpanded: true,
+        dropdownColor: Colors.white,
       ),
     );
   }

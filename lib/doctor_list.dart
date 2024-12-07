@@ -7,10 +7,7 @@ class DoctorListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
+        // Remove leading back button to prevent app stop
         title: const Text(
           'Find Your Doctor',
           style: TextStyle(fontSize: 18),
