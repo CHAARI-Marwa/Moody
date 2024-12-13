@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moody/dashboard.dart';
+import 'package:moody/doctor_list.dart';
+import 'package:moody/explore.dart';
 import 'package:moody/screens/activities/respiration.dart';
 import 'package:moody/screens/activities/meditation.dart';
 import 'package:moody/screens/activities/relaxation.dart';
@@ -6,15 +9,58 @@ import 'package:moody/screens/activities/yoga.dart';
 import 'package:moody/screens/activities/jacobson.dart';
 import 'package:moody/screens/activities/tictactoe.dart';
 
-class PlaygroundScreen extends StatelessWidget {
+class PlaygroundScreen extends StatefulWidget {
   const PlaygroundScreen({Key? key}) : super(key: key);
+
+  @override
+  _PlaygroundScreenState createState() => _PlaygroundScreenState();
+}
+
+class _PlaygroundScreenState extends State<PlaygroundScreen> {
+  void _onItemTapped(int index) {
+    switch (index) {
+      case 0: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DashboardScreen()), 
+        );
+        break;
+      case 1: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PlaygroundScreen()), 
+        );
+        break;
+      case 2: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DoctorListPage()), 
+        );
+        break;
+      case 3: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  OnboardingScreen()), 
+        );
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Playground'),
-        backgroundColor: Colors.lightBlue[100],
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
       body: GridView.count(
         padding: const EdgeInsets.all(16),
@@ -30,7 +76,8 @@ class PlaygroundScreen extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const RespirationExercisePage()),
+                MaterialPageRoute(
+                    builder: (context) => const RespirationExercisePage()),
               );
             },
           ),
@@ -42,7 +89,8 @@ class PlaygroundScreen extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MeditationExercisePage()),
+                MaterialPageRoute(
+                    builder: (context) => const MeditationExercisePage()),
               );
             },
           ),
@@ -54,7 +102,8 @@ class PlaygroundScreen extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const RelaxationExercisePage()),
+                MaterialPageRoute(
+                    builder: (context) => const RelaxationExercisePage()),
               );
             },
           ),
@@ -66,7 +115,8 @@ class PlaygroundScreen extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const YogaExercisePage()),
+                MaterialPageRoute(
+                    builder: (context) => const YogaExercisePage()),
               );
             },
           ),
@@ -78,7 +128,8 @@ class PlaygroundScreen extends StatelessWidget {
             () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const JacobsonExercisePage()),
+                MaterialPageRoute(
+                    builder: (context) => const JacobsonExercisePage()),
               );
             },
           ),
@@ -102,6 +153,33 @@ class PlaygroundScreen extends StatelessWidget {
             () {},
           ),
         ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedIconTheme: const IconThemeData(
+            color: Color(0xFFE5989B)), 
+        unselectedIconTheme: const IconThemeData(
+            color: Colors.black), 
+        currentIndex: 1, 
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.games),
+            label: "Let's Play",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.medical_services),
+            label: 'Doctor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        onTap: _onItemTapped,
       ),
     );
   }

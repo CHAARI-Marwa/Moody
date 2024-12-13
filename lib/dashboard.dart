@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moody/explore.dart';
 import 'doctor_list.dart';
-import 'had_survey.dart'; // Correct import for HADSurveyPage
+import 'had_survey.dart'; 
 import 'screens/playground.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -9,20 +10,49 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final PageController _pageController = PageController();
-  final String patientName = "Patient"; // This should come from user data
+  final String patientName = "Patient"; 
   final int mindHealthScore = 85;
   final String lastUpdate = "31/10/2056 10:12 AM";
-  int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      _pageController.jumpToPage(index);
-    });
+    switch (index) {
+      case 0: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DashboardScreen()), 
+        );
+        break;
+      case 1: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PlaygroundScreen()), 
+        );
+        break;
+      case 2: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DoctorListPage()), 
+        );
+        break;
+      case 3: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  OnboardingScreen()), 
+        );
+        break;
+      default:
+        break;
+    }
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -398,9 +428,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        selectedIconTheme:
+            const IconThemeData(color: Color(0xFFE5989B)), 
+        unselectedIconTheme: const IconThemeData(
+            color: Colors.black), 
+        currentIndex: 0, 
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home
+            ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
@@ -416,8 +453,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: 'Settings',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF004D60),
         onTap: _onItemTapped,
       ),
     );
@@ -516,4 +551,4 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-} 
+}

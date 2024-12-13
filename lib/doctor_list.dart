@@ -1,18 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:moody/dashboard.dart';
+import 'package:moody/explore.dart';
+import 'package:moody/screens/playground.dart';
 
-class DoctorListPage extends StatelessWidget {
+class DoctorListPage extends StatefulWidget {
   const DoctorListPage({Key? key}) : super(key: key);
+
+  @override
+  _DoctorListPageState createState() => _DoctorListPageState();
+}
+
+class _DoctorListPageState extends State<DoctorListPage> {
+  void _onItemTapped(int index) {
+    switch (index) {
+      case 0: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DashboardScreen()), 
+        );
+        break;
+      case 1: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  PlaygroundScreen()), 
+        );
+        break;
+      case 2: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  DoctorListPage()), 
+        );
+        break;
+      case 3: 
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  OnboardingScreen()), 
+        );
+        break;
+      default:
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Remove leading back button to prevent app stop
-        title: const Text(
-          'Find Your Doctor',
-          style: TextStyle(fontSize: 18),
-        ),
-        backgroundColor: Color(0xFF92DCE5),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,13 +84,39 @@ class DoctorListPage extends StatelessWidget {
                 trailing: IconButton(
                   icon: const Icon(Icons.add_circle_outline),
                   onPressed: () {
-                    // Add doctor selection functionality here
                   },
                 ),
               ),
             );
           },
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedIconTheme: const IconThemeData(
+            color: Color(0xFFE5989B)), 
+        unselectedIconTheme: const IconThemeData(
+            color: Colors.black),
+        currentIndex: 2, 
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.games),
+            label: "Let's Play",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.medical_services),
+            label: 'Doctor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        onTap: _onItemTapped,
       ),
     );
   }
