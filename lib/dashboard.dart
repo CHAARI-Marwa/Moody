@@ -13,7 +13,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final String patientName = "Patient"; // This should come from user data
   final int mindHealthScore = 85;
   final String lastUpdate = "31/10/2056 10:12 AM";
-  final String lastSeen = "31/10/2056 10:12 AM";
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
