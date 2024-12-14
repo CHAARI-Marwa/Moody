@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moody/explore.dart';
+import 'package:moody/food.dart';
 import 'package:moody/smile.dart';
 import 'doctor_list.dart';
 import 'had_survey.dart';
@@ -258,7 +259,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CaptureFoodScreen(),
+                                ),
+                              );
+                            },
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.only(
                                 top: 10,
