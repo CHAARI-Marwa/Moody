@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify
 import openai
 import os
 from dotenv import load_dotenv
-
+from flask_cors import CORS
 load_dotenv()
 
 app = Flask(__name__)
-
+CORS(app)
 # Set up OpenAI API
 openai.api_type = "azure"
 openai.api_base = "https://learnfromengineering.openai.azure.com/"
@@ -22,7 +22,7 @@ message_text = [
             "I need you to help me apply the cognitive behavioral therapy method to reduce a patient's level of anxiety. "
             "When the chat starts with a greeting, ask: 'What is the main cause of your anxiety?' "
             "Based on the patient's responses, ask up to two follow-up questions at a time to gradually help them explore and challenge their thoughts and feelings. "
-            "Be prepared to respond in Arabic, Tunisian Arabic, French, and English, depending on the language the user is speaking."
+            "Be prepared to respond in all languages depending on the language the user is speaking."
         )
     }
 ]

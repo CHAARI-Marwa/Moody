@@ -3,6 +3,10 @@ import 'package:moody/explore.dart';
 import 'package:moody/smile.dart';
 import 'doctor_list.dart';
 import 'had_survey.dart';
+import 'package:moody/chatbot.dart';
+import 'doctor_list.dart';
+import 'had_survey.dart'; // Correct import for HADSurveyPage
+import 'record_feeling/record.dart';
 import 'screens/playground.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -141,7 +145,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RecordScreen()),
+                              );
+                            },
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.only(
                                 top: 10,
@@ -398,7 +408,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               child: Row(
                                 children: [
                                   Expanded(
-                                    child: _buildInfoCard(
+                                    child: _buildInfoCardHad(
                                       title: "HAD Survey",
                                       icon: Icons.assignment,
                                       date: lastUpdate,
@@ -406,7 +416,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   SizedBox(width: 16),
                                   Expanded(
-                                    child: _buildInfoCard(
+                                    child: _buildInfoCardChatbot(
                                       title: "Chatbot",
                                       icon: Icons.chat_bubble_outline,
                                       date: lastUpdate,
@@ -492,7 +502,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildInfoCard({
+  Widget _buildInfoCardHad({
     required String title,
     required IconData icon,
     String? date,
@@ -503,6 +513,62 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => HADSurveyPage()),
+          );
+        }
+      },
+      child: Container(
+        padding: EdgeInsets.all(16),
+        height: 135,
+        constraints: BoxConstraints(minHeight: 135),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, size: 24),
+            SizedBox(height: 12),
+            Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            Spacer(),
+            if (date != null)
+              Text(
+                "Last Update: $date",
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 12,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInfoCardChatbot({
+    required String title,
+    required IconData icon,
+    String? date,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        if (title == "Chatbot") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatbotPage()),
           );
         }
       },
