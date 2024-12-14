@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moody/explore.dart';
+import 'package:moody/smile.dart';
 import 'doctor_list.dart';
-import 'had_survey.dart'; 
+import 'had_survey.dart';
 import 'screens/playground.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -10,42 +11,34 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final String patientName = "Patient"; 
+  final String patientName = "Patient";
   final int mindHealthScore = 85;
   final String lastUpdate = "31/10/2056 10:12 AM";
 
   void _onItemTapped(int index) {
     switch (index) {
-      case 0: 
+      case 0:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  DashboardScreen()), 
+          MaterialPageRoute(builder: (context) => DashboardScreen()),
         );
         break;
-      case 1: 
+      case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  PlaygroundScreen()), 
+          MaterialPageRoute(builder: (context) => PlaygroundScreen()),
         );
         break;
-      case 2: 
+      case 2:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  DoctorListPage()), 
+          MaterialPageRoute(builder: (context) => DoctorListPage()),
         );
         break;
-      case 3: 
+      case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  OnboardingScreen()), 
+          MaterialPageRoute(builder: (context) => OnboardingScreen()),
         );
         break;
       default:
@@ -198,7 +191,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CaptureSmile(),
+                                ),
+                              );
+                            },
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.only(
                                 top: 10,
@@ -428,16 +428,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedIconTheme:
-            const IconThemeData(color: Color(0xFFE5989B)), 
-        unselectedIconTheme: const IconThemeData(
-            color: Colors.black), 
-        currentIndex: 0, 
+        selectedIconTheme: const IconThemeData(color: Color(0xFFE5989B)),
+        unselectedIconTheme: const IconThemeData(color: Colors.black),
+        currentIndex: 0,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home
-            ),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
