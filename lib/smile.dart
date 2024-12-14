@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:moody/reward_system.dart';
 
 class CaptureSmile extends StatefulWidget {
   @override
@@ -8,16 +9,15 @@ class CaptureSmile extends StatefulWidget {
 }
 
 class _CaptureSmileState extends State<CaptureSmile> {
-  final String patientName = "Patient";  
-  final ImagePicker picker = ImagePicker(); 
-  File? _image; 
-  List<dynamic> objDetect = []; 
+  final String patientName = "Patient";
+  final ImagePicker picker = ImagePicker();
+  File? _image;
+  List<dynamic> objDetect = [];
   List<dynamic> boxes = [];
 
   Future<void> getImageFromCamera() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    List<dynamic> newDetectionList =
-        []; 
+    List<dynamic> newDetectionList = [];
     setState(() {
       objDetect = newDetectionList;
       boxes.clear();
@@ -45,20 +45,31 @@ class _CaptureSmileState extends State<CaptureSmile> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.copyright, size: 16),
-                        SizedBox(width: 4),
-                        Text("0010"),
-                      ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            RewardSystemScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.copyright, size: 16),
+                          SizedBox(width: 4),
+                          Text("0010"),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -197,9 +208,9 @@ class _CaptureSmileState extends State<CaptureSmile> {
                           ),
                           SizedBox(height: 35),
                           Icon(
-                            Icons.shield,
-                            color: Colors.white,
-                            size: 32,
+                            Icons.info_rounded,
+                            color: Colors.black,
+                            size: 40,
                           ),
                           SizedBox(height: 25),
                           Text(

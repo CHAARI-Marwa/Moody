@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:moody/reward_system.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -59,7 +60,8 @@ class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
 
   Future<void> _sendAudioToAPI(String filePath) async {
     final file = File(filePath);
-    final uri = Uri.parse("http://192.168.0.8:5001/upload"); // Replace with your Flask API endpoint
+    final uri = Uri.parse(
+        "http://192.168.0.8:5001/upload"); // Replace with your Flask API endpoint
     final request = http.MultipartRequest("POST", uri)
       ..files.add(await http.MultipartFile.fromPath('audio', file.path));
     final response = await request.send();
@@ -97,20 +99,30 @@ class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.copyright, size: 16),
-                        SizedBox(width: 4),
-                        Text("0010"),
-                      ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RewardSystemScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.copyright, size: 16),
+                          SizedBox(width: 4),
+                          Text("0010"),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -186,7 +198,8 @@ class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: _isRecording ? _stopRecording : _startRecording,
+                      onPressed:
+                          _isRecording ? _stopRecording : _startRecording,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFE5989B),
                         shape: RoundedRectangleBorder(
@@ -195,7 +208,11 @@ class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
                       ),
                       child: Text(
                         _isRecording ? "Stop Recording" : "Start Recording",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

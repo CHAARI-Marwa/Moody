@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moody/record_feeling/record_2.dart'; // Import the second page
+import 'package:moody/record_feeling/record_2.dart';
+import 'package:moody/reward_system.dart'; // Import the second page
 
 class RecordScreen extends StatefulWidget {
   @override
@@ -21,24 +22,34 @@ class _RecordScreenState extends State<RecordScreen> {
         ),
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(top:50)),
+            Padding(padding: EdgeInsets.only(top: 50)),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.copyright, size: 16),
-                        SizedBox(width: 4),
-                        Text("0010"),
-                      ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RewardSystemScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.copyright, size: 16),
+                          SizedBox(width: 4),
+                          Text("0010"),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -99,66 +110,101 @@ class _RecordScreenState extends State<RecordScreen> {
                     children: [
                       Column(
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.copyright, size: 16),
+                                      SizedBox(width: 4),
+                                      Text("0010"),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Icon(
                             Icons.mic,
                             color: Colors.white,
-                            size: 120,
+                            size: 100,
                           ),
-                          SizedBox(height: 16),
+                          // SizedBox(height: 16),
                           Text(
                             "Screen for Anxiety and Depression Using Your Voice",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: 26,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 20),
                           Text(
                             "Speak into the Microphone",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 20,
+                              fontSize: 22,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 40),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "• Ensure you're in a quiet environment.",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              SizedBox(height: 4),
+                              SizedBox(height: 6),
                               Text(
                                 "• Speak clearly for 30 seconds.",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              SizedBox(height: 4),
+                              SizedBox(height: 6),
                               Text(
                                 "• Feel free to share whatever comes to mind.",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
-                              SizedBox(height: 4),
+                              SizedBox(height: 6),
                               Text(
                                 "• We analyze the tone of your voice,\n  not the content of your words.",
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 35),
                           Icon(
-                            Icons.shield_outlined,
+                            Icons.info_rounded,
                             color: Colors.white,
-                            size: 32,
+                            size: 40,
                           ),
                           SizedBox(height: 8),
                           Text(
                             "Your voice is processed only on your device.\nIt is not recorded, saved, or shared.",
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 14),
+                            style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
                         ],
                       ),
@@ -176,16 +222,12 @@ class _RecordScreenState extends State<RecordScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 40,
-                            vertical: 20,
-                          ),
                         ),
                         child: Text(
                           "Start Speaking",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

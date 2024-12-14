@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:moody/explore.dart';
 import 'package:moody/food.dart';
+import 'package:moody/reward_system.dart';
 import 'package:moody/smile.dart';
 import 'doctor_list.dart';
 import 'had_survey.dart';
 import 'package:moody/chatbot.dart';
-import 'doctor_list.dart';
-import 'had_survey.dart'; // Correct import for HADSurveyPage
 import 'record_feeling/record.dart';
 import 'screens/playground.dart';
 
@@ -67,20 +66,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.copyright, size: 16),
-                        SizedBox(width: 4),
-                        Text("0010"),
-                      ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            RewardSystemScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.copyright, size: 16),
+                          SizedBox(width: 4),
+                          Text("0010"),
+                        ],
+                      ),
                     ),
                   ),
                 ),

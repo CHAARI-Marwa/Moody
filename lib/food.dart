@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:moody/reward_system.dart';
 
 class CaptureFoodScreen extends StatefulWidget {
   @override
@@ -8,16 +9,15 @@ class CaptureFoodScreen extends StatefulWidget {
 }
 
 class _CaptureFoodScreenState extends State<CaptureFoodScreen> {
-  final String patientName = "Patient";  
-  final ImagePicker picker = ImagePicker(); 
-  File? _image; 
-  List<dynamic> objDetect = []; 
+  final String patientName = "Patient";
+  final ImagePicker picker = ImagePicker();
+  File? _image;
+  List<dynamic> objDetect = [];
   List<dynamic> boxes = [];
 
   Future<void> getImageFromCamera() async {
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
-    List<dynamic> newDetectionList =
-        []; 
+    List<dynamic> newDetectionList = [];
     setState(() {
       objDetect = newDetectionList;
       boxes.clear();
@@ -45,20 +45,30 @@ class _CaptureFoodScreenState extends State<CaptureFoodScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.copyright, size: 16),
-                        SizedBox(width: 4),
-                        Text("0010"),
-                      ],
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => RewardSystemScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.copyright, size: 16),
+                          SizedBox(width: 4),
+                          Text("0010"),
+                        ],
+                      ),
                     ),
                   ),
                 ),
