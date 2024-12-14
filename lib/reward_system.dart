@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'package:moody/convert_coins.dart';
 
 class RewardSystemScreen extends StatefulWidget {
   @override
@@ -99,39 +99,17 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                     children: [
                       Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.copyright, size: 16),
-                                      SizedBox(width: 4),
-                                      Text("0010"),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          
                           Icon(
                             Icons.copyright,
-                            color: Colors.black,
+                            color: Colors.white,
                             size: 100,
                           ),
                           Text(
                             "Reward System",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
                             ),
@@ -140,59 +118,193 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Speak into the Microphone.",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                ),
+                              Row(
+                                children: [
+                                  Icon(Icons.mic, color: Colors.white, size: 30),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      "Speak into the Microphone.",
+                                      style: TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent, // No fill color
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white, // Stroke color
+                                        width: 2,            // Stroke width
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "5",
+                                      style: TextStyle(
+                                        color: Colors.white,  // Text color
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Share Your Smile.",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                ),
+                              SizedBox(height: 25),
+                              Row(
+                                children: [
+                                  Icon(Icons.camera_alt, color: Colors.white, size: 30),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      "Share Your Smile.",
+                                      style: TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent, // No fill color
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white, // Stroke color
+                                        width: 2,            // Stroke width
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "5",
+                                      style: TextStyle(
+                                        color: Colors.white,  // Text color
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Capture Your Meal.",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                ),
+                              SizedBox(height: 25),
+                              Row(
+                                children: [
+                                  Icon(Icons.restaurant, color: Colors.white, size: 30),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      "Capture Your Meal.",
+                                      style: TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent, // No fill color
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white, // Stroke color
+                                        width: 2,            // Stroke width
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "5",
+                                      style: TextStyle(
+                                        color: Colors.white,  // Text color
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Let's Play !",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                ),
+                              SizedBox(height: 25),
+                              Row(
+                                children: [
+                                  Icon(Icons.videogame_asset, color: Colors.white, size: 30),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      "Let's Play!",
+                                      style: TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent, // No fill color
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white, // Stroke color
+                                        width: 2,            // Stroke width
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "5",
+                                      style: TextStyle(
+                                        color: Colors.white,  // Text color
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
-                              SizedBox(height: 6),
-                              Text(
-                                "Chatbot",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                ),
+                              SizedBox(height: 25),
+                              Row(
+                                children: [
+                                  Icon(Icons.chat, color: Colors.white, size: 30),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: Text(
+                                      "Chatbot.",
+                                      style: TextStyle(color: Colors.white, fontSize: 16),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 35,
+                                    height: 35,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent, // No fill color
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.white, // Stroke color
+                                        width: 2,            // Stroke width
+                                      ),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "5",
+                                      style: TextStyle(
+                                        color: Colors.white,  // Text color
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
                               ),
                             ],
                           ),
-                          SizedBox(height: 35),
-                          Icon(
-                            Icons.info_rounded,
-                            color: Colors.black,
-                            size: 40,
-                          ),
-                          SizedBox(height: 25),
                           
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: () {                          
+                        onPressed: () {   
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ConvertCoinsScreen(),
+                            ),
+                          );                       
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color(0xFFE5989B),
@@ -201,7 +313,7 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                           ),
                         ),
                         child: Text(
-                          "Take Photo",
+                          "Convert Coins",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 22,
