@@ -117,25 +117,15 @@ class IntroPage1 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/explore',
+                    'assets/explore/IMG_4813-22.png',
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Speech',
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: 'titre',
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                 ],
               ),
             ),
@@ -155,25 +145,15 @@ class IntroPage2 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/explore',
+                    'assets/explore/IMG_4813-22.png',
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Smile',
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: 'titre',
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                 ],
               ),
             ),
@@ -193,25 +173,15 @@ class IntroPage3 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'assets/explore',
+                    'assets/explore/IMG_4813-22.png',
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    "Meals",
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      fontFamily: 'titre',
-                      color: Colors.black,
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
                 ],
               ),
             ),
