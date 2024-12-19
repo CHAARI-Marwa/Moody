@@ -6,57 +6,125 @@ class ConvertCoinsScreen extends StatefulWidget {
 }
 
 class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
-  final String patientName = "Patient"; 
+  final String patientName = "Patient";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF005F73),
-      body: SafeArea(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/white_bg.png'), // Background image
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            // Coin Logo at the Top
-            Center(
-              child: Icon(
-                Icons.copyright,
-                size: 80,
-                color: Colors.white,
-              ),
+            SizedBox(height: 50), // Top margin
+            // Coin Balance Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.copyright, size: 16, color: Colors.black),
+                        SizedBox(width: 4),
+                        Text("998"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
-            // Title and Subtitle
-            Text(
-              "Convert Coins",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              "Discount on medical Consultation",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            SizedBox(height: 40),
-
-            // List of Discount Options
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+            
+            Padding(
+              padding: const EdgeInsets.only(left: 30.0),
+              child: Row(
                 children: [
-                  _buildDiscountOption("10% Discount", "500"),
-                  SizedBox(height: 20),
-                  _buildDiscountOption("30% Discount", "1000"),
-                  SizedBox(height: 20),
-                  _buildDiscountOption("50% Discount", "2000"),
-                  SizedBox(height: 20),
-                  _buildDiscountOption("70% Discount", "3000"),
+                  Icon(Icons.person, size: 100, color: Color(0xFF005F73)),
+                  SizedBox(width: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Hello",
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Color(0xFF005F73),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        patientName,
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Color(0xFFE5989B),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
+              ),
+            ),
+            SizedBox(height: 56),
+            // Blue Bottom Section
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFF005F73),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      // Title Section
+                      Icon(Icons.copyright, size: 60, color: Colors.white),
+                      SizedBox(height: 10),
+                      Text(
+                        "Convert Coins",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "Discount on medical Consultation",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(height: 30),
+                      // Discount Options
+                      _buildDiscountOption("10% Discount", "500"),
+                      SizedBox(height: 20),
+                      _buildDiscountOption("30% Discount", "1000"),
+                      SizedBox(height: 20),
+                      _buildDiscountOption("50% Discount", "2000"),
+                      SizedBox(height: 20),
+                      _buildDiscountOption("70% Discount", "3000"),
+                      SizedBox(height: 40),
+                      // Convert Coins Button
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
@@ -68,7 +136,7 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
   // Widget for Discount Options
   Widget _buildDiscountOption(String discount, String coins) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white, width: 2),
         borderRadius: BorderRadius.circular(12),
@@ -86,11 +154,7 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
           ),
           Row(
             children: [
-              Icon(
-                Icons.copyright,
-                color: Colors.white,
-                size: 24,
-              ),
+              Icon(Icons.copyright, color: Colors.white, size: 20),
               SizedBox(width: 5),
               Text(
                 coins,

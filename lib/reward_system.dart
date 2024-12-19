@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moody/convert_coins.dart';
-
+import 'package:moody/dashboard.dart';
 class RewardSystemScreen extends StatefulWidget {
   @override
   _RewardSystemScreenState createState() => _RewardSystemScreenState();
@@ -37,7 +37,7 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                       children: [
                         Icon(Icons.copyright, size: 16),
                         SizedBox(width: 4),
-                        Text("0010"),
+                        Text("998"),
                       ],
                     ),
                   ),

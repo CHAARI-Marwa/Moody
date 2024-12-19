@@ -47,7 +47,7 @@ class _RecordScreenState extends State<RecordScreen> {
                         children: [
                           Icon(Icons.copyright, size: 16),
                           SizedBox(width: 4),
-                          Text("0010"),
+                          Text("998"),
                         ],
                       ),
                     ),
@@ -126,7 +126,7 @@ class _RecordScreenState extends State<RecordScreen> {
                                     children: [
                                       Icon(Icons.copyright, size: 16),
                                       SizedBox(width: 4),
-                                      Text("0010"),
+                                      Text("+05"),
                                     ],
                                   ),
                                 ),

@@ -16,8 +16,11 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   final String patientName = "Patient";
-  final int mindHealthScore = 85;
+  final int mindHealthScore = 70;
   final String lastUpdate = "31/10/2056 10:12 AM";
+  int avgSleepHours = 6; // Example hours
+  int avgSleepMinutes = 7; // Example minutes
+  int avgHeartRate = 70; // Example bpm
 
   void _onItemTapped(int index) {
     switch (index) {
@@ -50,6 +53,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
   }
 
+  Widget childText(String title, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+            color: Colors.black87,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,8 +99,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            RewardSystemScreen(),
+                        builder: (context) => RewardSystemScreen(),
                       ),
                     );
                   },
@@ -88,7 +115,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Icon(Icons.copyright, size: 16),
                           SizedBox(width: 4),
-                          Text("0010"),
+                          Text("998"),
                         ],
                       ),
                     ),
@@ -367,6 +394,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    // Mind Health Section
                                     Text(
                                       "Mind Health",
                                       style: TextStyle(
@@ -376,45 +404,142 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                     ),
                                     SizedBox(height: 16),
-                                    Center(
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          SizedBox(
-                                            width: 150,
-                                            height: 150,
-                                            child: CircularProgressIndicator(
-                                              value: mindHealthScore / 100,
-                                              strokeWidth: 12,
-                                              backgroundColor: Colors.grey[200],
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                Color(0xFF2A9D8F),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceBetween, // Adjust alignment
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // Circular Progress Indicator (Mind Health Score)
+                                        Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            SizedBox(
+                                              width: 120,
+                                              height: 120,
+                                              child: CircularProgressIndicator(
+                                                value: mindHealthScore / 100,
+                                                strokeWidth: 12,
+                                                backgroundColor:
+                                                    Colors.grey[200],
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(
+                                                  Color(0xFF2A9D8F),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                "$mindHealthScore",
-                                                style: TextStyle(
-                                                  fontSize: 36,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color(0xFF2A9D8F),
+                                            Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  "$mindHealthScore",
+                                                  style: TextStyle(
+                                                    fontSize: 36,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color(0xFF2A9D8F),
+                                                  ),
                                                 ),
-                                              ),
-                                              Text(
-                                                "Good",
-                                                style: TextStyle(
-                                                  color: Colors.grey[600],
-                                                  fontSize: 16,
+                                                Text(
+                                                  "Good",
+                                                  style: TextStyle(
+                                                    color: Colors.grey[600],
+                                                    fontSize: 16,
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(width: 16), // Adjust spacing
+
+                                        // Avg. Sleep Hours and Avg. Heart Rates
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            // Sleep Hours Section
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Avg. Sleep Hours",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.grey[600],
+                                                  ),
+                                                ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    text: "$avgSleepHours",
+                                                    style: TextStyle(
+                                                      fontSize:
+                                                          28, // Adjusted font size
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black,
+                                                    ),
+                                                    children: [
+                                                      TextSpan(
+                                                        text: " hours ",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              Colors.grey[600],
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            "$avgSleepMinutes",
+                                                        style: TextStyle(
+                                                          fontSize: 28,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text: " min",
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          color:
+                                                              Colors.grey[600],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 16),
+
+                                            // Heart Rates Section
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Avg. Heart Rates",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.grey[600],
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "$avgHeartRate bpm",
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        28, // Adjusted font size
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
