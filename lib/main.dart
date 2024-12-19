@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'dashboard.dart';
-
+import 'package:moody/explore.dart';
 void main() {
   runApp(MyApp());
 }
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: DashboardScreen(),
+      home: LoginScreen(),
       routes: {
         '/dashboard': (context) => DashboardScreen(),
       },

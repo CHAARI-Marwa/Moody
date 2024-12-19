@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo
+                  SizedBox(height: 150),
                   Text(
                     'MooDy',
                     style: TextStyle(
