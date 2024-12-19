@@ -37,13 +37,12 @@ class _HomeState extends State<Home> {
     if (text.isEmpty) return;
 
     try {
-      // Proceed with sending the message
       setState(() {
-        _messages.insert(0, {'content': text, 'isUserMessage': true, 'shouldAnimate': true});
+        _messages.insert(
+            0, {'content': text, 'isUserMessage': true, 'shouldAnimate': true});
         _messageController.clear();
       });
 
-      // Send user information along with the message to Flask server
       await sendToFlask(text);
     } catch (e) {
       print('Error in sendMessage: $e');
@@ -57,16 +56,19 @@ class _HomeState extends State<Home> {
       };
 
       var response = await http.post(
-        Uri.parse('http://192.168.1.23:5000/chat'),
+        Uri.parse('http://192.168.1.142:5000/chat'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestData),
       );
 
-
       var jsonResponse = jsonDecode(response.body);
 
       setState(() {
-        _messages.insert(0, {'content': jsonResponse['ai_response'], 'isUserMessage': false, 'shouldAnimate': true});
+        _messages.insert(0, {
+          'content': jsonResponse['ai_response'],
+          'isUserMessage': false,
+          'shouldAnimate': true
+        });
       });
     } catch (e) {
       print('Error in sendToFlask: $e');
@@ -88,6 +90,30 @@ class _HomeState extends State<Home> {
             );
           },
         ),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.copyright, size: 16),
+                      SizedBox(width: 4),
+                      Text("+06"),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -101,7 +127,9 @@ class _HomeState extends State<Home> {
                 final shouldAnimate = _messages[index]['shouldAnimate'];
 
                 return AnimatedAlign(
-                  alignment: isUserMessage ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment: isUserMessage
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   duration: Duration(milliseconds: shouldAnimate ? 500 : 0),
                   curve: shouldAnimate ? Curves.easeInOut : Curves.linear,
                   onEnd: () {
@@ -113,7 +141,8 @@ class _HomeState extends State<Home> {
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                     decoration: BoxDecoration(
-                      color: isUserMessage ? Color(0xFF90E0EF) : Colors.grey[300],
+                      color:
+                          isUserMessage ? Color(0xFF90E0EF) : Colors.grey[300],
                       borderRadius: BorderRadius.circular(20),
                     ),
                     duration: Duration(milliseconds: shouldAnimate ? 500 : 0),
@@ -145,7 +174,8 @@ class _HomeState extends State<Home> {
                       decoration: InputDecoration(
                         hintText: 'Type your message...',
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
                     ),
                   ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:moody/dashboard.dart';
+import 'package:moody/methods.dart';
 import 'dart:io';
 import 'package:moody/reward_system.dart';
 
@@ -9,7 +11,7 @@ class CaptureFoodScreen extends StatefulWidget {
 }
 
 class _CaptureFoodScreenState extends State<CaptureFoodScreen> {
-  final String patientName = "Patient";
+  final String patientName = "Hedi";
   final ImagePicker picker = ImagePicker();
   File? _image;
   List<dynamic> objDetect = [];
@@ -21,6 +23,18 @@ class _CaptureFoodScreenState extends State<CaptureFoodScreen> {
     setState(() {
       objDetect = newDetectionList;
       boxes.clear();
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ApproveAlertDialog(
+            title: 'Well done!',
+            contentText: 'Your task has been recorded.',
+            onOkPressed: () {
+              press(context, DashboardScreen());
+            },
+          );
+        },
+      );
     });
     if (pickedFile != null) {
       setState(() {
@@ -66,7 +80,7 @@ class _CaptureFoodScreenState extends State<CaptureFoodScreen> {
                         children: [
                           Icon(Icons.copyright, size: 16),
                           SizedBox(width: 4),
-                          Text("998"),
+                          Text("1006"),
                         ],
                       ),
                     ),

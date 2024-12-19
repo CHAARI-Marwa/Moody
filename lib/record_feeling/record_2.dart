@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
+import 'package:moody/dashboard.dart';
+import 'package:moody/methods.dart';
 import 'package:moody/reward_system.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
@@ -11,7 +13,7 @@ class HowAreYouFeelingScreen extends StatefulWidget {
 }
 
 class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
-  final String patientName = "Patient"; // Placeholder for dynamic patient name
+  final String patientName = "Hedi"; 
   FlutterSoundRecorder? _recorder;
   bool _isRecording = false;
   String? _recordingPath;
@@ -26,7 +28,6 @@ class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
     _recorder = FlutterSoundRecorder();
     await _recorder!.openRecorder();
 
-    // Request microphone permission
     if (await Permission.microphone.request().isDenied) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Microphone permission is required.")),
@@ -55,13 +56,25 @@ class _HowAreYouFeelingScreenState extends State<HowAreYouFeelingScreen> {
     if (path != null) {
       _recordingPath = path;
       _sendAudioToAPI(path);
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ApproveAlertDialog(
+            title: 'Well done!',
+            contentText: 'Your task has been recorded.',
+            onOkPressed: () {
+              press(context, DashboardScreen());
+            },
+          );
+        },
+      );
     }
   }
 
   Future<void> _sendAudioToAPI(String filePath) async {
     final file = File(filePath);
     final uri = Uri.parse(
-        "http://192.168.0.8:5001/upload"); // Replace with your Flask API endpoint
+        "http://192.168.0.8:5001/upload"); 
     final request = http.MultipartRequest("POST", uri)
       ..files.add(await http.MultipartFile.fromPath('audio', file.path));
     final response = await request.send();

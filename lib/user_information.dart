@@ -74,7 +74,6 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        // Calculate age
         final today = DateTime.now();
         int age = today.year - picked.year;
         if (today.month < picked.month || (today.month == picked.month && today.day < picked.day)) {
@@ -99,7 +98,6 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Container
           Container(
             decoration: BoxDecoration(
               color: Color(0xFFF7C8E0),
@@ -112,7 +110,6 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
           SafeArea(
             child: Column(
               children: [
-                // Top Bar
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -146,7 +143,6 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                     ],
                   ),
                 ),
-                // Main Content
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -224,7 +220,6 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
-                                    // Here you would typically save the user information
                                     final userInfo = {
                                       'firstName': _firstNameController.text,
                                       'lastName': _lastNameController.text,
@@ -234,7 +229,6 @@ class _UserInformationScreenState extends State<UserInformationScreen> {
                                       'hasChronicIllness': hasChronicIllness,
                                       'takingMedications': takingMedications,
                                     };
-                                    // Navigate to dashboard
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

@@ -15,12 +15,12 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final String patientName = "Patient";
-  final int mindHealthScore = 70;
+  final String patientName = "Hedi";
+  final int mindHealthScore = 60;
   final String lastUpdate = "31/10/2056 10:12 AM";
-  int avgSleepHours = 6; // Example hours
-  int avgSleepMinutes = 7; // Example minutes
-  int avgHeartRate = 70; // Example bpm
+  int avgSleepHours = 6; 
+  int avgSleepMinutes = 7; 
+  int avgHeartRate = 70; 
 
   void _onItemTapped(int index) {
     switch (index) {
@@ -115,7 +115,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Icon(Icons.copyright, size: 16),
                           SizedBox(width: 4),
-                          Text("998"),
+                          Text("1026"),
                         ],
                       ),
                     ),
@@ -166,7 +166,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Container(
                 child: Stack(
                   children: [
-                    // First container
                     Positioned(
                       top: 0,
                       left: 0,
@@ -222,7 +221,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                     ),
-                    // Second container
                     Positioned(
                       top: 40,
                       left: 0,
@@ -279,7 +277,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                     ),
-                    // Third container
                     Positioned(
                       top: 80,
                       left: 0,
@@ -352,30 +349,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Last Update",
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    lastUpdate,
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            const SizedBox(height: 30),
                             Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Container(
@@ -406,7 +380,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     SizedBox(height: 16),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment
-                                          .spaceBetween, // Adjust alignment
+                                          .spaceBetween, 
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -441,7 +415,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "Good",
+                                                  "Medium",
                                                   style: TextStyle(
                                                     color: Colors.grey[600],
                                                     fontSize: 16,
@@ -451,8 +425,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(width: 16), // Adjust spacing
-
+                                        SizedBox(width: 16), 
                                         // Avg. Sleep Hours and Avg. Heart Rates
                                         Column(
                                           crossAxisAlignment:
@@ -475,7 +448,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                     text: "$avgSleepHours",
                                                     style: TextStyle(
                                                       fontSize:
-                                                          28, // Adjusted font size
+                                                          28, 
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black,
@@ -514,7 +487,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                             ),
                                             SizedBox(height: 16),
 
-                                            // Heart Rates Section
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -530,7 +502,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                                   "$avgHeartRate bpm",
                                                   style: TextStyle(
                                                     fontSize:
-                                                        28, // Adjusted font size
+                                                        28, 
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black,
                                                   ),

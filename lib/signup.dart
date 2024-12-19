@@ -19,7 +19,6 @@ class _SignUpState extends State<SignUp> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
-    // Set status bar color to white and icons to dark
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarIconBrightness: Brightness.dark,
@@ -28,7 +27,6 @@ class _SignUpState extends State<SignUp> {
 
   @override
   void dispose() {
-    // Reset status bar color when leaving this screen
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
@@ -41,7 +39,6 @@ class _SignUpState extends State<SignUp> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Navigate to UserInformationScreen
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -56,7 +53,6 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Container
           Container(
             decoration: BoxDecoration(
               color: Color(0xFFF7C8E0),
@@ -66,11 +62,9 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           ),
-          // Content
           SafeArea(
             child: Column(
               children: [
-                // Top Bar
                 Container(
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -104,7 +98,6 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                 ),
-                // Main Content
                 Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
@@ -113,7 +106,6 @@ class _SignUpState extends State<SignUp> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 40),
-                          // Title
                           Text(
                             'Create\nAccount',
                             style: TextStyle(
@@ -125,7 +117,6 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                           SizedBox(height: 40),
-                          // Form Fields
                           Form(
                             key: _formKey,
                             child: Column(
@@ -239,7 +230,6 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                 ),
                                 SizedBox(height: 32),
-                                // Sign Up Button
                                 SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(

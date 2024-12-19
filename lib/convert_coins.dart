@@ -6,23 +6,21 @@ class ConvertCoinsScreen extends StatefulWidget {
 }
 
 class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
-  final String patientName = "Patient";
-
+  final String patientName = "Hedi";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/white_bg.png'), // Background image
+            image: AssetImage('assets/white_bg.png'), 
             fit: BoxFit.cover,
           ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50), // Top margin
-            // Coin Balance Row
+            SizedBox(height: 50), 
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -77,7 +75,6 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
               ),
             ),
             SizedBox(height: 56),
-            // Blue Bottom Section
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -92,7 +89,6 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
                   child: Column(
                     children: [
                       SizedBox(height: 20),
-                      // Title Section
                       Icon(Icons.copyright, size: 60, color: Colors.white),
                       SizedBox(height: 10),
                       Text(
@@ -112,7 +108,6 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
                         ),
                       ),
                       SizedBox(height: 30),
-                      // Discount Options
                       _buildDiscountOption("10% Discount", "500"),
                       SizedBox(height: 20),
                       _buildDiscountOption("30% Discount", "1000"),
@@ -121,7 +116,6 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
                       SizedBox(height: 20),
                       _buildDiscountOption("70% Discount", "3000"),
                       SizedBox(height: 40),
-                      // Convert Coins Button
                     ],
                   ),
                 ),
@@ -133,7 +127,6 @@ class _ConvertCoinsScreenState extends State<ConvertCoinsScreen> {
     );
   }
 
-  // Widget for Discount Options
   Widget _buildDiscountOption(String discount, String coins) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moody/record_feeling/record_2.dart';
-import 'package:moody/reward_system.dart'; // Import the second page
+import 'package:moody/reward_system.dart'; 
 
 class RecordScreen extends StatefulWidget {
   @override
@@ -8,7 +8,7 @@ class RecordScreen extends StatefulWidget {
 }
 
 class _RecordScreenState extends State<RecordScreen> {
-  final String patientName = "Patient"; // This should come from user data
+  final String patientName = "Hedi";
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,6 @@ class _RecordScreenState extends State<RecordScreen> {
                             color: Colors.white,
                             size: 100,
                           ),
-                          // SizedBox(height: 16),
                           Text(
                             "Screen for Anxiety and Depression Using Your Voice",
                             textAlign: TextAlign.center,

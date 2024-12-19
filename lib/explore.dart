@@ -59,7 +59,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     dotWidth: 10,
                   ),
                 ),
-                //next or done
                 onLastPage
                     ? GestureDetector(
                         onTap: () {

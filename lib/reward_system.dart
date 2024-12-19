@@ -7,7 +7,7 @@ class RewardSystemScreen extends StatefulWidget {
 }
 
 class _RewardSystemScreenState extends State<RewardSystemScreen> {
-  final String patientName = "Patient";  
+  final String patientName = "Hedi";  
 
   @override
   Widget build(BuildContext context) {
@@ -132,18 +132,18 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                                     width: 35,
                                     height: 35,
                                     decoration: BoxDecoration(
-                                      color: Colors.transparent, // No fill color
+                                      color: Colors.transparent,  
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.white, // Stroke color
-                                        width: 2,            // Stroke width
+                                        color: Colors.white, 
+                                        width: 2,            
                                       ),
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
                                       "5",
                                       style: TextStyle(
-                                        color: Colors.white,  // Text color
+                                        color: Colors.white,  
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -167,18 +167,18 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                                     width: 35,
                                     height: 35,
                                     decoration: BoxDecoration(
-                                      color: Colors.transparent, // No fill color
+                                      color: Colors.transparent, 
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.white, // Stroke color
-                                        width: 2,            // Stroke width
+                                        color: Colors.white, 
+                                        width: 2,            
                                       ),
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
                                       "5",
                                       style: TextStyle(
-                                        color: Colors.white,  // Text color
+                                        color: Colors.white,  
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -202,18 +202,18 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                                     width: 35,
                                     height: 35,
                                     decoration: BoxDecoration(
-                                      color: Colors.transparent, // No fill color
+                                      color: Colors.transparent, 
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.white, // Stroke color
-                                        width: 2,            // Stroke width
+                                        color: Colors.white, 
+                                        width: 2,            
                                       ),
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
                                       "5",
                                       style: TextStyle(
-                                        color: Colors.white,  // Text color
+                                        color: Colors.white,  
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -237,18 +237,18 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                                     width: 35,
                                     height: 35,
                                     decoration: BoxDecoration(
-                                      color: Colors.transparent, // No fill color
+                                      color: Colors.transparent, 
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.white, // Stroke color
-                                        width: 2,            // Stroke width
+                                        color: Colors.white, 
+                                        width: 2,            
                                       ),
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
                                       "5",
                                       style: TextStyle(
-                                        color: Colors.white,  // Text color
+                                        color: Colors.white,  
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -272,18 +272,18 @@ class _RewardSystemScreenState extends State<RewardSystemScreen> {
                                     width: 35,
                                     height: 35,
                                     decoration: BoxDecoration(
-                                      color: Colors.transparent, // No fill color
+                                      color: Colors.transparent, 
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.white, // Stroke color
-                                        width: 2,            // Stroke width
+                                        color: Colors.white, 
+                                        width: 2,            
                                       ),
                                     ),
                                     alignment: Alignment.center,
                                     child: Text(
                                       "5",
                                       style: TextStyle(
-                                        color: Colors.white,  // Text color
+                                        color: Colors.white,  
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),

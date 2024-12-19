@@ -61,12 +61,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   SizedBox(height: 40),
-                  // Form
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
-                        // Email Field
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
@@ -90,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        // Password Field
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.grey[200],
@@ -115,7 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        // Remember me and Forgot Password
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -149,7 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                // Handle forgot password
                               },
                               child: Text(
                                 'Forgot Password?',
@@ -163,14 +158,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        // Sign in Button
                         SizedBox(
                           width: double.infinity,
                           height: 55,
                           child: ElevatedButton(
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                // Handle sign in
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -191,7 +184,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(height: 16),
-                        // Sign up link
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -223,7 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        // Or sign in with
                         Row(
                           children: [
                             Expanded(child: Divider(color: Colors.grey[400])),
@@ -242,7 +233,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                         SizedBox(height: 24),
-                        // Social login buttons
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

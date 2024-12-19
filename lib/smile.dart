@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:moody/dashboard.dart';
+import 'package:moody/methods.dart';
 import 'dart:io';
 import 'package:moody/reward_system.dart';
 
@@ -9,7 +11,7 @@ class CaptureSmile extends StatefulWidget {
 }
 
 class _CaptureSmileState extends State<CaptureSmile> {
-  final String patientName = "Patient";
+  final String patientName = "Hedi";
   final ImagePicker picker = ImagePicker();
   File? _image;
   List<dynamic> objDetect = [];
@@ -21,6 +23,18 @@ class _CaptureSmileState extends State<CaptureSmile> {
     setState(() {
       objDetect = newDetectionList;
       boxes.clear();
+      showDialog(
+        context: context,
+        builder: (context) {
+          return ApproveAlertDialog(
+            title: 'Well done!',
+            contentText: 'Your task has been recorded.',
+            onOkPressed: () {
+              press(context, DashboardScreen());
+            },
+          );
+        },
+      );
     });
     if (pickedFile != null) {
       setState(() {
@@ -50,8 +64,7 @@ class _CaptureSmileState extends State<CaptureSmile> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            RewardSystemScreen(),
+                        builder: (context) => RewardSystemScreen(),
                       ),
                     );
                   },
@@ -67,7 +80,7 @@ class _CaptureSmileState extends State<CaptureSmile> {
                         children: [
                           Icon(Icons.copyright, size: 16),
                           SizedBox(width: 4),
-                          Text("+03"),
+                          Text("1003"),
                         ],
                       ),
                     ),
@@ -146,7 +159,7 @@ class _CaptureSmileState extends State<CaptureSmile> {
                                     children: [
                                       Icon(Icons.copyright, size: 16),
                                       SizedBox(width: 4),
-                                      Text("0010"),
+                                      Text("+03"),
                                     ],
                                   ),
                                 ),
